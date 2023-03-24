@@ -54,3 +54,14 @@ yc managed-kubernetes cluster \
 
 ## 3. Создание тестового приложения
 
+https://github.com/sisipka/nginx
+
+## 4. Подготовка cистемы мониторинга и деплой приложения
+
+В `stable/prometheus-operator` включена Grafana с набором готовых дашборд и набор ServiceMonitors для сбора метрик с сервисов кластера, таких как CoreDNS, API Server, Scheduler, etc:
+
+```bash
+
+helm install --namespace monitoring --create-namespace prometheus stable/prometheus-operator
+
+```
