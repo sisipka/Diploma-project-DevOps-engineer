@@ -1,0 +1,35 @@
+github:
+ user: sisipka
+ token: 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
+ secret: ulokchmxxlhmwbelbuawkjrtrpljnqjkozilbbuvnkmmkiimkhelimgvraqtqrvdzjhmckbpxenplyqfccqskhgldntohcsnncgsdjvflwlszhfbyjsascvaepaajzgh
+ hostname: github.com
+# Replace this with your own repo whitelist:
+orgWhitelist: github.com/sisipka/netology_terraform/* # Don't forget the "*" to whitelist all the repository of your group
+
+service:
+ type: LoadBalancer
+ port: 80
+
+# AWS credentials outputted when created your Kubernetes cluster on EKS
+yandex:
+ credentials: |
+   [default]
+   token = AQAAAAAGQL6RAATuwRqtlE5KfEO3iKUYBBiFNWw
+   cloud_id = b1g3va6uroak1bss6lnp
+   folder_id = b1ge911130k5mdbil616
+
+repoConfig: |
+ ---
+ repos:
+   - id: /.*/
+     branch:
+     apply_requirements: []
+     workflow: default
+     allowed_overrides: []
+     allow_custom_workflows: false
+ workflows:
+   default:
+    plan:
+      steps: [init, plan]
+    apply:
+      steps: [apply]

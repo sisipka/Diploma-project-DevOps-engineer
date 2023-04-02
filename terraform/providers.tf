@@ -10,8 +10,8 @@ terraform {
   bucket     = "state-shestihin"
   region     = "ru-central1"
   key        = "terraform.tfstate"
-  access_key = "YCAJEOt6XuTHuc1MUWBpEPs0X"
-  secret_key = "YCOoUxagOyw6JzI5-g0d03AZ_vtBzyTxFAF9azF0"
+  access_key = "YCAJEYM0tLo6-kE69fPRyyEFW"
+  secret_key = "YCMSumWvUN3fpHciKdTy2BeL5NIYPjRKZf_5k0js"
 
   skip_region_validation      = true
   skip_credentials_validation = true
