@@ -430,19 +430,19 @@ prometheus-operator     ClusterIP   None            <none>        8443/TCP      
 
 **Доступ к интерфейсам**
 
-Prometheus
+**Prometheus**
 ```bash
 $ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
 ```
 Then access via http://localhost:9090
 
-Grafana
+**Grafana**
 ```bash
 $ kubectl --namespace monitoring port-forward --address 0.0.0.0 svc/grafana 3000
 ```
 Then access via http://localhost:3000 and use the default grafana user:password of admin:admin.
 
-Alert Manager
+**Alert Manager**
 ```bash
 $ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
 ```
@@ -452,7 +452,7 @@ Then access via http://localhost:9093
   <img src="./pic/grafana.png">
 </p>
 
-- Установка Atlantis:
+- **Установка Atlantis:**
 
 1. helm repo add runatlantis https://runatlantis.github.io/helm-charts
 
@@ -513,9 +513,13 @@ clusterrolebinding.rbac.authorization.k8s.io/jenkins created
   <img src="./pic/jenkins.png">
 </p>
 
+Настраиваем Pipeline:
+
 <p align="left">
   <img src="./pic/jenkins2.png">
 </p>
+
+Прописываем webhook:
 
 <p align="left">
   <img src="./pic/github-webhook.png">
@@ -539,7 +543,7 @@ clusterrolebinding.rbac.authorization.k8s.io/jenkins created
   <img src="./pic/docker_login.png">
 </p>
 
-Создайте диаграмму Helm для приложения helm_nginx.
+Создаем диаграмму Helm для приложения `helm_nginx`.
 
 ```bash
 helm install nginx-app /helm_nginx -n jenkins
@@ -563,13 +567,13 @@ helm install nginx-app /helm_nginx -n jenkins
   <img src="./pic/jenkins_pr2.png">
 </p>
 
-3. Пушит в dockerhub
+3. Jenkins отправляет image в dockerhub:
 
 <p align="left">
   <img src="./pic/dockerhub.png">
 </p>
 
-4. Разворачивает в kebernetes:
+4. Разворачивает image nginx в kubernetes:
 
 ```bash
 andreyshestikhin@MacBook-Air-Andrey ~ % kubectl get svc -n jenkins
