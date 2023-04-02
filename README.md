@@ -205,7 +205,7 @@ kube-system   yc-disk-csi-node-v2-g528q                             6/6     Runn
 kube-system   yc-disk-csi-node-v2-jcr5l                             6/6     Running   0               5m56s
 ```
 <p align="left">
-  <img src="./pic/kube_cluster.jpg">
+  <img src="./pic/kube_cluster.png">
 </p>
 
 ## 3. Создание тестового приложения
@@ -242,7 +242,7 @@ kubernetes      ClusterIP      10.96.128.1     <none>           443/TCP        2
 nginx-service   LoadBalancer   10.96.167.112   84.201.147.233   80:30804/TCP   85s
 ```
 <p align="left">
-  <img src="./pic/nginx.jpg">
+  <img src="./pic/nginx.png">
 </p>
 
 - В `stable/prometheus-operator` включена Grafana с набором готовых дашборд и набор ServiceMonitors для сбора метрик с сервисов кластера, таких как CoreDNS, API Server, Scheduler, etc:
@@ -449,7 +449,7 @@ $ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
 Then access via http://localhost:9093
 
 <p align="left">
-  <img src="./pic/grafana.jpg">
+  <img src="./pic/grafana.png">
 </p>
 
 - Установка Atlantis:
@@ -510,19 +510,19 @@ clusterrolebinding.rbac.authorization.k8s.io/jenkins created
 ```
 
 <p align="left">
-  <img src="./pic/jenkins.jpg">
+  <img src="./pic/jenkins.png">
 </p>
 
 <p align="left">
-  <img src="./pic/jenkins2.jpg">
+  <img src="./pic/jenkins2.png">
 </p>
 
 <p align="left">
-  <img src="./pic/github-webhook.jpg">
+  <img src="./pic/github-webhook.png">
 </p>
 
 <p align="left">
-  <img src="./pic/first-commit.jpg">
+  <img src="./pic/first-commit.png">
 </p>
 
 - **Настраиваем Jenkins для Build, Test, Push (Docker Hub) и разворачивания контейнера в кластере Kubernetes**
@@ -530,13 +530,13 @@ clusterrolebinding.rbac.authorization.k8s.io/jenkins created
 Для  предоставления динамических агентов нужно поставить [плагин Kubernetes](https://plugins.jenkins.io/kubernetes/)
 
 <p align="left">
-  <img src="./pic/jenkins_agent.jpg">
+  <img src="./pic/jenkins_agent.png">
 </p>
 
 Добавить учетные данные для dockerhub:
 
 <p align="left">
-  <img src="./pic/docker_login.jpg">
+  <img src="./pic/docker_login.png">
 </p>
 
 Создайте диаграмму Helm для приложения helm_nginx.
@@ -550,23 +550,23 @@ helm install nginx-app /helm_nginx -n jenkins
 1. Делаем коммит "presentation" в github:
 
 <p align="left">
-  <img src="./pic/commit.jpg">
+  <img src="./pic/commit.png">
 </p>
 
 2. Jenkins по commmit запускает наш pipeline:
 
 <p align="left">
-  <img src="./pic/jenkins_pr1.jpg">
+  <img src="./pic/jenkins_pr1.png">
 </p>
 
 <p align="left">
-  <img src="./pic/jenkins_pr2.jpg">
+  <img src="./pic/jenkins_pr2.png">
 </p>
 
 3. Пушит в dockerhub
 
 <p align="left">
-  <img src="./pic/dockerhub.jpg">
+  <img src="./pic/dockerhub.png">
 </p>
 
 4. Разворачивает в kebernetes:
@@ -584,5 +584,5 @@ nginx-app-deployment-7955bfd8b5-j9stp   1/1     Running   0          91m
 ```
 
 <p align="left">
-  <img src="./pic/nginx-app.jpg">
+  <img src="./pic/nginx-app.png">
 </p>
