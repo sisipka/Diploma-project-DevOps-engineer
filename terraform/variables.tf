@@ -1,7 +1,7 @@
 # OAuth-токен
 #https://cloud.yandex.ru/docs/iam/concepts/authorization/iam-token
 variable "token" {
-  default = "AQAAAAAGQL6RAATuwRqtlE5KfEO3iKUYBBiFNWw"
+  default = ""
 }
 
 # Заменить на ID своего облака
@@ -23,10 +23,10 @@ variable "bucket_name" {
 
 # Задаем s3_access_key
 variable "s3_access_key" {
-  default = "YCAJEr4sJutIXkaFjgbtZHCVh"
+  default = ""
 }
 
 # Задаем s3_secret_key
 variable "s3_secret_key" {
-  default = "YCMIIytL3nqHcjG8YYI2DKx-fbkB-FNXFEh81yUg"
+  default = ""
 }

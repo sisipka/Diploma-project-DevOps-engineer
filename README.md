@@ -454,8 +454,7 @@ Then access via http://localhost:9093
 
 - **Установка Atlantis:**
 
-1. helm repo add runatlantis https://runatlantis.github.io/helm-charts
-
+https://github.com/sisipka/terraform-atlantis
 
 ## 5. Установка и настройка CI/CD
 
