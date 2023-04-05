@@ -74,6 +74,8 @@ secret: YCNmT0AhNU5XHAOesMBdMvHn64qU6QqnRBOp_VzJ
 ```
 [Конфигурация Terraform](https://github.com/sisipka/diploma-devops-engineer/tree/main/terraform)
 
+
+
 ## 2. Создание Kubernetes кластера
 
 Kubernetes разворачивается при помощи сервиса Yandex Managed Service for Kubernetes, конфигурация которого описана в файле [kubernetes.tf](https://github.com/sisipka/diploma-devops-engineer/blob/main/terraform/kubernetes.tf)
@@ -157,9 +159,11 @@ kuber-shestihin_external_v4_address = "https://84.201.145.128"
 ```
 
  **Создание кластера Kubernetes**
+
  https://cloud.yandex.ru/docs/managed-kubernetes/operations/kubernetes-cluster/kubernetes-cluster-create
 
  О**бзор способов подключения**
+
  https://cloud.yandex.ru/docs/managed-kubernetes/operations/connect/
 
 ```bash
@@ -202,11 +206,15 @@ kube-system   yc-disk-csi-node-v2-jcr5l                             6/6     Runn
   <img src="./pic/kube_cluster.png">
 </p>
 
+
+
 ## 3. Создание тестового приложения
 
 Git репозиторий с тестовым приложением и Dockerfile:
 
 https://github.com/sisipka/nginx
+
+
 
 ## 4. Подготовка cистемы мониторинга и деплой приложения
 
@@ -237,6 +245,7 @@ NAME            TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        A
 kubernetes      ClusterIP      10.96.128.1     <none>           443/TCP        23m
 nginx-service   LoadBalancer   10.96.167.112   84.201.147.233   80:30804/TCP   85s
 ```
+
 <p align="left">
   <img src="./pic/nginx.png">
 </p>
@@ -451,6 +460,8 @@ prometheus-operator     ClusterIP   None            <none>        8443/TCP      
 - **Для отслеживания изменений инфраструктуры используется Terraform Cloud:**
 
 https://github.com/sisipka/terraform_diplom
+
+
 
 ## 5. Установка и настройка CI/CD
 
