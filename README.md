@@ -17,8 +17,6 @@ yc iam access-key create --service-account-name state-shestihin
 yc storage bucket create \
   --name state-shestihin \
   --default-storage-class standard
-# Создайте ключ доступа для сервисного аккаунта state-shestihin
-yc iam access-key create --service-account-name state-shestihin
 ```
 
 ```bash
@@ -74,10 +72,11 @@ secret: YCNmT0AhNU5XHAOesMBdMvHn64qU6QqnRBOp_VzJ
   skip_credentials_validation = true
   }
 ```
-
+[Конфигурация Terraform](https://github.com/sisipka/diploma-devops-engineer/tree/main/terraform)
 
 ## 2. Создание Kubernetes кластера
 
+Kubernetes разворачивается при помощи сервиса Yandex Managed Service for Kubernetes, конфигурация которого описана в файле [kubernetes.tf](https://github.com/sisipka/diploma-devops-engineer/blob/main/terraform/kubernetes.tf)
 
 ```bash
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform init
@@ -99,10 +98,6 @@ Terraform has been successfully initialized!
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform workspace new stage                                  
 Created and switched to workspace "stage"!
 
-You're now on a new, empty workspace. Workspaces isolate their state,
-so if you run "terraform plan" Terraform will not see any existing state
-for this configuration.
-andreyshestikhin@MacBook-Air-Andrey terraform % terraform workspace select stage
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform workspace list        
   default
 * stage
@@ -161,20 +156,19 @@ cluster_id = "catbtuvlqm2h9l99upmm"
 kuber-shestihin_external_v4_address = "https://84.201.145.128"
 ```
 
+ **Создание кластера Kubernetes**
+ https://cloud.yandex.ru/docs/managed-kubernetes/operations/kubernetes-cluster/kubernetes-cluster-create
+
+ О**бзор способов подключения**
+ https://cloud.yandex.ru/docs/managed-kubernetes/operations/connect/
 
 ```bash
-# Создание кластера Kubernetes
-# https://cloud.yandex.ru/docs/managed-kubernetes/operations/kubernetes-cluster/kubernetes-cluster-create
-
-# Обзор способов подключения
-# https://cloud.yandex.ru/docs/managed-kubernetes/operations/connect/
-
 yc managed-kubernetes cluster \
   get-credentials kuber-shestihin \
   --external \
   --force
-
 ```
+
 ```bash
 andreyshestikhin@MacBook-Air-Andrey terraform % kubectl cluster-info
 Kubernetes control plane is running at https://84.201.145.128
@@ -210,11 +204,13 @@ kube-system   yc-disk-csi-node-v2-jcr5l                             6/6     Runn
 
 ## 3. Создание тестового приложения
 
+Git репозиторий с тестовым приложением и Dockerfile:
+
 https://github.com/sisipka/nginx
 
 ## 4. Подготовка cистемы мониторинга и деплой приложения
 
-- Деплой nginx
+- Деплой тестового приложения nginx при помощи helm:
 
 ```bash
 helm install nginx helm_nginx
@@ -428,33 +424,33 @@ prometheus-operated     ClusterIP   None            <none>        9090/TCP      
 prometheus-operator     ClusterIP   None            <none>        8443/TCP                     10m
 ```
 
-**Доступ к интерфейсам**
+**Доступ к интерфейсам:**
 
-**Prometheus**
-```bash
-$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
-```
-Then access via http://localhost:9090
+  - **Prometheus**
+  ```bash
+  $ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+  ```
+  Then access via http://localhost:9090
 
-**Grafana**
-```bash
-$ kubectl --namespace monitoring port-forward --address 0.0.0.0 svc/grafana 3000
-```
-Then access via http://localhost:3000 and use the default grafana user:password of admin:admin.
+  - **Grafana**
+  ```bash
+  $ kubectl --namespace monitoring port-forward --address 0.0.0.0 svc/grafana 3000
+  ```
+  Then access via http://localhost:3000 and use the default grafana user:password of admin:admin.
 
-**Alert Manager**
-```bash
-$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
-```
-Then access via http://localhost:9093
+  - **Alert Manager**
+  ```bash
+  $ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
+  ```
+  Then access via http://localhost:9093
 
-<p align="left">
-  <img src="./pic/grafana.png">
-</p>
+  <p align="left">
+    <img src="./pic/grafana.png">
+  </p>
 
-- **Установка Atlantis:**
+- **Для отслеживания изменений инфраструктуры используется Terraform Cloud:**
 
-https://github.com/sisipka/terraform-atlantis
+https://github.com/sisipka/terraform_diplom
 
 ## 5. Установка и настройка CI/CD
 
@@ -499,7 +495,7 @@ NAME      TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)               
 jenkins   LoadBalancer   10.96.242.191   84.201.145.226   80:30114/TCP,443:31660/TCP   4m46s
   ```
 
-Для корректной работы скриптов автоматического деплоя понадобится дать разришение cluster-admin для Jenkins для получения списка ресурсов в kubernetes и манипулирвоания с ними.
+Для корректной работы скриптов автоматического деплоя понадобится дать разрешение cluster-admin для Jenkins для получения списка ресурсов в kubernetes и работы с ними.
 
 ```bash
 andreyshestikhin@MacBook-Air-Andrey ~ % kubectl -n jenkins create sa jenkins
