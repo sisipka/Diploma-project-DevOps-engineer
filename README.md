@@ -586,7 +586,7 @@ helm install nginx-app /helm_nginx -n jenkins
   <img src="./pic/dockerhub.png">
 </p>
 
-4. Разворачивает image nginx в kubernetes:
+4. Jenkins разворачивает image nginx в kubernetes:
 
 ```bash
 andreyshestikhin@MacBook-Air-Andrey ~ % kubectl get svc -n jenkins
@@ -599,6 +599,8 @@ jenkins-59445b5d6c-vf48g                1/1     Running   0          47h
 nginx-app-deployment-7955bfd8b5-26njw   1/1     Running   0          91m
 nginx-app-deployment-7955bfd8b5-j9stp   1/1     Running   0          91m
 ```
+
+5. Приложение успешно развернулось и доступно:
 
 <p align="left">
   <img src="./pic/nginx-app.png">
