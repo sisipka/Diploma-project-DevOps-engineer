@@ -461,6 +461,13 @@ prometheus-operator     ClusterIP   None            <none>        8443/TCP      
 
 https://github.com/sisipka/terraform_diplom
 
+<p align="left">
+  <img src="./pic/plan.png">
+</p>
+
+<p align="left">
+  <img src="./pic/apply.png">
+</p>
 
 
 ## 5. Установка и настройка CI/CD
