@@ -1,7 +1,7 @@
 # OAuth-токен
 #https://cloud.yandex.ru/docs/iam/concepts/authorization/iam-token
 variable "token" {
-  default = "AQAAAAAGQL6RAATuwRqtlE5KfEO3iKUYBBiFNWw"
+  default = ""
 }
 
 # Заменить на ID своего облака
@@ -19,14 +19,4 @@ variable "folder_id" {
 # Задаем имя buketa
 variable "bucket_name" {
   default = "diploma-shestihin"
-}
-
-# Задаем s3_access_key
-variable "access_key" {
-  default = "YCAJEic5BB7ge3AknJgPrfJwJ"
-}
-
-# Задаем ы3_secret_key
-variable "secret_key" {
-  default = "YCNZqxNku2KBzTr8TCJDa48vag7haoZHIXQ-Bi4i"
 }
