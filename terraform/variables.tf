@@ -20,13 +20,3 @@ variable "folder_id" {
 variable "bucket_name" {
   default = "diploma-shestihin"
 }
-
-# Задаем s3_access_key
-variable "s3_access_key" {
-  default = ""
-}
-
-# Задаем s3_secret_key
-variable "s3_secret_key" {
-  default = ""
-}

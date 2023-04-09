@@ -11,7 +11,7 @@ yc iam service-account get state-shestihin
 yc resource-manager folder add-access-binding netology \
   --role editor \
   --service-account-name state-shestihin 
-# Создайте ключ доступа для сервисного аккаунта `state-shestihin` - нужно прописать в файле providers.tf
+# Создайте ключ доступа для сервисного аккаунта `state-shestihin`
 yc iam access-key create --service-account-name state-shestihin
 # Создайте бакет `state-shestihin` в каталоге по умолчанию
 yc storage bucket create \
@@ -56,30 +56,25 @@ access_key:
   key_id: YCAJETKsjpS7OeVu4cWZYzV2F
 secret: YCNmT0AhNU5XHAOesMBdMvHn64qU6QqnRBOp_VzJ
 ```
+- Terraform init
 
-- **В файле providers.tf добавляем ключ доступа для сервисного аккаунта state-shestihin:**
+accesskey и secretkey - это ключи доступа, которые используются для авторизации при работе с S3. Обычно они предоставляются облачным провайдером.
+
+Когда Terraform инициализирует бэкенд, он создает файл terraform.tfstate, который содержит информацию о текущем состоянии инфраструктуры. Этот файл хранится в S3 и используется Terraform для отслеживания изменений в инфраструктуре.
+
+Важно убедиться, что ключи доступа не хранятся в открытом доступе и защищены от несанкционированного доступа. 
+
+Ключи доступа будем передавать через переменную среды:
 
 ```bash
-  backend "s3" {
-  endpoint   = "storage.yandexcloud.net"
-  bucket     = "state-shestihin"
-  region     = "ru-central1"
-  key        = "terraform.tfstate"
-  access_key = "YCAJETKsjpS7OeVu4cWZYzV2F"
-  secret_key = "YCNmT0AhNU5XHAOesMBdMvHn64qU6QqnRBOp_VzJ"
-
-  skip_region_validation      = true
-  skip_credentials_validation = true
-  }
+export AWS_ACCESS_KEY_ID="anaccesskey"
+export AWS_SECRET_ACCESS_KEY="asecretkey"
 ```
-[Конфигурация Terraform](https://github.com/sisipka/diploma-devops-engineer/tree/main/terraform)
 
-
-
-## 2. Создание Kubernetes кластера
-
-Kubernetes разворачивается при помощи сервиса Yandex Managed Service for Kubernetes, конфигурация которого описана в файле [kubernetes.tf](https://github.com/sisipka/diploma-devops-engineer/blob/main/terraform/kubernetes.tf)
-
+```bash
+andreyshestikhin@MacBook-Air-Andrey terraform % export AWS_ACCESS_KEY_ID="YCAJEic5BB7ge3AknJgPrfJwJ"
+export AWS_SECRET_ACCESS_KEY="YCNZqxNku2KBzTr8TCJDa48vag7haoZHIXQ-Bi4i"```
+```
 ```bash
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform init
 
@@ -96,6 +91,12 @@ Initializing provider plugins...
 ...
 
 Terraform has been successfully initialized!
+```
+
+
+## 2. Создание Kubernetes кластера
+
+Kubernetes разворачивается при помощи сервиса Yandex Managed Service for Kubernetes, конфигурация которого описана в файле [kubernetes.tf](https://github.com/sisipka/diploma-devops-engineer/blob/main/terraform/kubernetes.tf)
 
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform workspace new stage                                  
 Created and switched to workspace "stage"!
@@ -605,3 +606,5 @@ nginx-app-deployment-7955bfd8b5-j9stp   1/1     Running   0          91m
 <p align="left">
   <img src="./pic/nginx-app.png">
 </p>
+
+[Jenkins Pipeline](https://github.com/sisipka/nginx/blob/main/Jenkinsfile)
