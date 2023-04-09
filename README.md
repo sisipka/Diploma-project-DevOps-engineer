@@ -101,6 +101,7 @@ Kubernetes разворачивается при помощи сервиса Yan
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform workspace new stage                                  
 Created and switched to workspace "stage"!
 
+```bash
 andreyshestikhin@MacBook-Air-Andrey terraform % terraform workspace list        
   default
 * stage
