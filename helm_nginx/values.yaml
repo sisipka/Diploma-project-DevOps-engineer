@@ -1,6 +1,0 @@
-# Default Values for my Helm Chart
-
-container:
-  image: sisipka/nginx
-
-replicaCount: 2
