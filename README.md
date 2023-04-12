@@ -609,3 +609,52 @@ nginx-app-deployment-7955bfd8b5-j9stp   1/1     Running   0          91m
 </p>
 
 [Jenkins Pipeline](https://github.com/sisipka/nginx/blob/main/Jenkinsfile)
+
+6. Задание:
+
+При любом коммите в репозиторие с тестовым приложением происходит сборка и отправка в регистр Docker образа. Здесь не должен запускаться деплой в k8s
+
+При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes.
+
+```bash
+andreyshestikhin@MacBook-Air-Andrey nginx % kubectl get pod,svc -n jenkins
+NAME                                        READY   STATUS    RESTARTS      AGE
+pod/jenkins-74bd7444bb-vlhxm                1/1     Running   2 (18h ago)   45h
+pod/nginx-app-deployment-7955bfd8b5-2qql8   1/1     Running   0             45h
+pod/nginx-app-deployment-7955bfd8b5-xlvkx   1/1     Running   0             45h
+
+NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
+service/jenkins             LoadBalancer   10.96.170.108   51.250.73.132    80:31639/TCP,443:30044/TCP   45h
+service/nginx-app-service   LoadBalancer   10.96.220.193   158.160.39.193   80:30683/TCP                 45h
+```
+- При любом коммите или создании тега в репозиторие с тестовым приложением происходит запуск Pipeline в Jenkins:
+
+<p align="left">
+  <img src="./pic/jenkins1.png">
+</p>
+
+- При любом коммите в репозиторие с тестовым приложением происходит сборка и отправка в регистр Docker образа. Здесь не должен запускаться деплой в k8s:
+
+<p align="left">
+  <img src="./pic/jenkins22.png">
+</p>
+
+<p align="left">
+  <img src="./pic/jenkins3.png">
+</p>
+
+<p align="left">
+  <img src="./pic/jenkins4.png">
+</p>
+
+- При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes:
+
+<p align="left">
+  <img src="./pic/jenkins5.png">
+</p>
+
+- Регистр Dockerhub
+
+<p align="left">
+  <img src="./pic/docker.png">
+</p>
