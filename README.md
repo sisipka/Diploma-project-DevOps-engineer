@@ -658,3 +658,9 @@ service/nginx-app-service   LoadBalancer   10.96.220.193   158.160.39.193   80:3
 <p align="left">
   <img src="./pic/docker.png">
 </p>
+
+- Приложение nginx:
+
+<p align="left">
+  <img src="./pic/nginx2.png">
+</p>
