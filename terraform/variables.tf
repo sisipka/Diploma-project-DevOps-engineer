@@ -1,7 +1,7 @@
 # OAuth-токен
 #https://cloud.yandex.ru/docs/iam/concepts/authorization/iam-token
 variable "token" {
-  default = "AQAAAAAGQL6RAATuwRqtlE5KfEO3iKUYBBiFNWw"
+  default = ""
 }
 
 # Заменить на ID своего облака
